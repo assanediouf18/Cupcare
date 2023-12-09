@@ -1,4 +1,4 @@
-import 'package:cupcare/Components/machine_card.dart';
+import 'package:cupcare/Components/machine_tile.dart';
 import 'package:cupcare/Components/product_card.dart';
 import 'package:cupcare/Components/scaffold_template.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView.builder(
         itemCount: 10,
         itemBuilder: (BuildContext context, int index) {
-          return MachineCard();
+          return MachineTile(isWorking: index % 3 != 2);
         });
   }
 }
