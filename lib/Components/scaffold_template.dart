@@ -1,9 +1,10 @@
-import 'package:cupcare/color_schemes.g.dart';
 import 'package:flutter/material.dart';
 
 class CupCareScaffoldTemplate extends StatelessWidget {
   const CupCareScaffoldTemplate({
     super.key,
+    required this.backgroundColor,
+    this.headlineColor = Colors.black,
     required this.currentView,
     required this.bottomAppBar,
     required this.showSearchBar,
@@ -12,13 +13,22 @@ class CupCareScaffoldTemplate extends StatelessWidget {
   final Widget currentView;
   final BottomAppBar bottomAppBar;
   final bool showSearchBar;
+  final Color backgroundColor;
+  final Color headlineColor;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: baseMainColor,
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.logout))],
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.logout,
+                color: headlineColor,
+              ))
+        ],
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
       ),
@@ -29,7 +39,10 @@ class CupCareScaffoldTemplate extends StatelessWidget {
               padding: const EdgeInsets.only(top: 16, bottom: 72),
               child: Text(
                 "Bienvenue Jane",
-                style: Theme.of(context).textTheme.headlineLarge,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineLarge!
+                    .copyWith(color: headlineColor),
               ),
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:cupcare/Components/machine_tile.dart';
 import 'package:cupcare/Components/product_card.dart';
 import 'package:cupcare/Components/scaffold_template.dart';
+import 'package:cupcare/color_schemes.g.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,6 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
     var machinesListView = buildMachinesListView();
     var bottomAppBar = getBottomAppBar(bottomAppBarIconSize);
     return CupCareScaffoldTemplate(
+      backgroundColor: showProductPage ? baseMainColor : baseSecondColor,
+      headlineColor: showProductPage ? Colors.black : Colors.white,
       currentView: showProductPage ? productGridView : machinesListView,
       bottomAppBar: bottomAppBar,
       showSearchBar: false,
