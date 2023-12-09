@@ -4,31 +4,26 @@ class CupCareScaffoldTemplate extends StatelessWidget {
   const CupCareScaffoldTemplate({
     super.key,
     required this.backgroundColor,
-    this.headlineColor = Colors.black,
+    required this.appBarActions,
+    required this.bannerMainElement,
     required this.currentView,
     required this.bottomAppBar,
     required this.showSearchBar,
   });
 
   final Widget currentView;
-  final BottomAppBar bottomAppBar;
+  final BottomAppBar? bottomAppBar;
   final bool showSearchBar;
   final Color backgroundColor;
-  final Color headlineColor;
+  final List<Widget> appBarActions;
+  final Widget bannerMainElement;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.logout,
-                color: headlineColor,
-              ))
-        ],
+        actions: appBarActions,
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
       ),
@@ -37,13 +32,7 @@ class CupCareScaffoldTemplate extends StatelessWidget {
           Center(
             child: Padding(
               padding: const EdgeInsets.only(top: 16, bottom: 72),
-              child: Text(
-                "Bienvenue Jane",
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineLarge!
-                    .copyWith(color: headlineColor),
-              ),
+              child: bannerMainElement,
             ),
           ),
           Expanded(

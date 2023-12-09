@@ -20,9 +20,24 @@ class _HomeScreenState extends State<HomeScreen> {
     var productGridView = buildProductGridView();
     var machinesListView = buildMachinesListView();
     var bottomAppBar = getBottomAppBar(bottomAppBarIconSize);
+    var onBannerColor = showProductPage ? Colors.black : Colors.white;
     return CupCareScaffoldTemplate(
       backgroundColor: showProductPage ? baseMainColor : baseSecondColor,
-      headlineColor: showProductPage ? Colors.black : Colors.white,
+      appBarActions: [
+        IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.logout,
+              color: onBannerColor,
+            ))
+      ],
+      bannerMainElement: Text(
+        "Bienvenue Jane",
+        style: Theme.of(context)
+            .textTheme
+            .headlineLarge!
+            .copyWith(color: onBannerColor),
+      ),
       currentView: showProductPage ? productGridView : machinesListView,
       bottomAppBar: bottomAppBar,
       showSearchBar: false,
