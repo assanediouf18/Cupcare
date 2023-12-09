@@ -4,14 +4,14 @@ class CupCareScaffoldTemplate extends StatelessWidget {
   const CupCareScaffoldTemplate({
     super.key,
     required this.backgroundColor,
-    required this.appBarActions,
     required this.bannerMainElement,
-    required this.currentView,
+    required this.child,
     required this.bottomAppBar,
-    required this.showSearchBar,
+    this.showSearchBar = false,
+    this.appBarActions = const [],
   });
 
-  final Widget currentView;
+  final Widget child;
   final BottomAppBar? bottomAppBar;
   final bool showSearchBar;
   final Color backgroundColor;
@@ -46,7 +46,7 @@ class CupCareScaffoldTemplate extends StatelessWidget {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                  child: currentView,
+                  child: child,
                 ),
               ),
               //PUT THE SEARCH BAR HERE

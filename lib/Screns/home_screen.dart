@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var machinesListView = buildMachinesListView();
     var bottomAppBar = getBottomAppBar(bottomAppBarIconSize);
     var onBannerColor = showProductPage ? Colors.black : Colors.white;
+
     return CupCareScaffoldTemplate(
       backgroundColor: showProductPage ? baseMainColor : baseSecondColor,
       appBarActions: [
@@ -38,9 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
             .headlineLarge!
             .copyWith(color: onBannerColor),
       ),
-      currentView: showProductPage ? productGridView : machinesListView,
       bottomAppBar: bottomAppBar,
-      showSearchBar: false,
+      child: showProductPage ? productGridView : machinesListView,
     );
   }
 
