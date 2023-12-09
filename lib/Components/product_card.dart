@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
-  final isAvailable;
+  final bool isAvailable;
 
   const ProductCard({super.key, this.isAvailable = true});
 
