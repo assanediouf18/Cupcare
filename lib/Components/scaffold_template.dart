@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 class CupCareScaffoldTemplate extends StatelessWidget {
   const CupCareScaffoldTemplate({
     super.key,
-    required this.productGridView,
+    required this.currentView,
     required this.bottomAppBar,
+    required this.showSearchBar,
   });
 
-  final Padding productGridView;
+  final Widget currentView;
   final BottomAppBar bottomAppBar;
+  final bool showSearchBar;
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +41,14 @@ class CupCareScaffoldTemplate extends StatelessWidget {
                       BorderRadius.vertical(top: Radius.circular(16.0)),
                   color: Theme.of(context).colorScheme.background,
                 ),
-                child: productGridView,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  child: currentView,
+                ),
               ),
               //PUT THE SEARCH BAR HERE
+              showSearchBar ? Placeholder() : Container()
             ]),
           )
         ]),

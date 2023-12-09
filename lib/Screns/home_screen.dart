@@ -1,3 +1,4 @@
+import 'package:cupcare/Components/machine_card.dart';
 import 'package:cupcare/Components/product_card.dart';
 import 'package:cupcare/Components/scaffold_template.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var bottomAppBarIconSize = 32.0;
     var productGridView = buildProductGridView();
+    var machinesListView = buildMachinesListView();
     var bottomAppBar = getBottomAppBar(bottomAppBarIconSize);
     return CupCareScaffoldTemplate(
-        productGridView: productGridView, bottomAppBar: bottomAppBar);
+      currentView: showProductPage ? productGridView : machinesListView,
+      bottomAppBar: bottomAppBar,
+      showSearchBar: false,
+    );
   }
 
   BottomAppBar getBottomAppBar(double bottomAppBarIconSize) {
@@ -50,20 +55,25 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 
-  Padding buildProductGridView() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      child: GridView.count(
-        crossAxisCount: 2,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        children: [
-          for (var i = 0; i < 10; i++)
-            ProductCard(
-              isAvailable: (i % 5 != 3),
-            )
-        ],
-      ),
+  GridView buildProductGridView() {
+    return GridView.count(
+      crossAxisCount: 2,
+      mainAxisSpacing: 8,
+      crossAxisSpacing: 8,
+      children: [
+        for (var i = 0; i < 10; i++)
+          ProductCard(
+            isAvailable: (i % 5 != 3),
+          )
+      ],
     );
+  }
+
+  Widget buildMachinesListView() {
+    return ListView.builder(
+        itemCount: 10,
+        itemBuilder: (BuildContext context, int index) {
+          return MachineCard();
+        });
   }
 }
