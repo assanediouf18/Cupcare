@@ -1,10 +1,7 @@
-import 'dart:ffi';
-
 import 'package:cupcare/Screns/home_screen.dart';
 import 'package:cupcare/color_schemes.g.dart';
 import 'package:flutter/material.dart';
 import 'package:cupcare/Screns/register.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});

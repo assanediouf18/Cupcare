@@ -1,8 +1,6 @@
-import 'dart:ffi';
 import 'package:cupcare/color_schemes.g.dart';
 import 'package:cupcare/Screns/login.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class Register extends StatelessWidget {
   const Register({super.key});

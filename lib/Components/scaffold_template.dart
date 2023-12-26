@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CupCareScaffoldTemplate extends StatelessWidget {
   const CupCareScaffoldTemplate({
@@ -8,6 +7,7 @@ class CupCareScaffoldTemplate extends StatelessWidget {
     required this.bannerMainElement,
     required this.child,
     required this.bottomAppBar,
+    required this.searchField,
     this.showSearchBar = true,
     this.appBarActions = const [],
   });
@@ -18,6 +18,7 @@ class CupCareScaffoldTemplate extends StatelessWidget {
   final Color backgroundColor;
   final List<Widget> appBarActions;
   final Widget bannerMainElement;
+  final Container searchField;
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +52,7 @@ class CupCareScaffoldTemplate extends StatelessWidget {
                 ),
               ),
               //PUT THE SEARCH BAR HERE
-              showSearchBar
-                  ? _searchField('Rechercher dans CupCare')
-                  : Container(),
+              showSearchBar ? searchField : Container(),
             ]),
           )
         ]),

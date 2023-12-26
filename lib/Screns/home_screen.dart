@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var machinesListView = buildMachinesListView();
     var bottomAppBar = getBottomAppBar(bottomAppBarIconSize);
     var onBannerColor = showProductPage ? Colors.black : Colors.white;
+    var searchField = _getsearchField("Rechercher dans CupCare");
 
     return CupCareScaffoldTemplate(
       backgroundColor: showProductPage ? baseMainColor : baseSecondColor,
@@ -38,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: onBannerColor, fontWeight: FontWeight.w100, fontSize: 32),
       ),
       bottomAppBar: bottomAppBar,
+      searchField: searchField,
       child: showProductPage ? productGridView : machinesListView,
     );
   }
@@ -91,5 +93,37 @@ class _HomeScreenState extends State<HomeScreen> {
         itemBuilder: (BuildContext context, int index) {
           return MachineTile(isWorking: index % 3 != 2);
         });
+  }
+
+  Container _getsearchField(var hintText) {
+    return Container(
+      margin: EdgeInsets.only(left: 40, right: 40),
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.11),
+          blurRadius: 40,
+          spreadRadius: 0.0,
+        )
+      ]),
+      child: TextField(
+        decoration: InputDecoration(
+            filled: true,
+            fillColor: Color.fromRGBO(217, 217, 217, 1.0),
+            contentPadding: EdgeInsets.all(10),
+            hintText: hintText,
+            hintStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+            ),
+            prefixIcon: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Image.asset('assets/images/search.png'),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide.none,
+            )),
+      ),
+    );
   }
 }
