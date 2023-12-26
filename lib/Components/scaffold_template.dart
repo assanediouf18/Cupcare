@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CupCareScaffoldTemplate extends StatelessWidget {
   const CupCareScaffoldTemplate({
@@ -7,7 +8,7 @@ class CupCareScaffoldTemplate extends StatelessWidget {
     required this.bannerMainElement,
     required this.child,
     required this.bottomAppBar,
-    this.showSearchBar = false,
+    this.showSearchBar = true,
     this.appBarActions = const [],
   });
 
@@ -45,17 +46,51 @@ class CupCareScaffoldTemplate extends StatelessWidget {
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      const EdgeInsets.symmetric(vertical: 50, horizontal: 16),
                   child: child,
                 ),
               ),
               //PUT THE SEARCH BAR HERE
-              showSearchBar ? Placeholder() : Container()
+              showSearchBar
+                  ? _searchField('Rechercher dans CupCare')
+                  : Container(),
             ]),
           )
         ]),
       ),
       bottomNavigationBar: bottomAppBar,
+    );
+  }
+
+  Container _searchField(var hintText) {
+    return Container(
+      margin: EdgeInsets.only(left: 40, right: 40),
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.11),
+          blurRadius: 40,
+          spreadRadius: 0.0,
+        )
+      ]),
+      child: TextField(
+        decoration: InputDecoration(
+            filled: true,
+            fillColor: Color.fromRGBO(217, 217, 217, 1.0),
+            contentPadding: EdgeInsets.all(10),
+            hintText: hintText,
+            hintStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+            ),
+            prefixIcon: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Image.asset('assets/images/search.png'),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide.none,
+            )),
+      ),
     );
   }
 }

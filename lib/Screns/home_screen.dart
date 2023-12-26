@@ -34,10 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
       bannerMainElement: Text(
         "Bienvenue Jane",
-        style: Theme.of(context)
-            .textTheme
-            .headlineLarge!
-            .copyWith(color: onBannerColor),
+        style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+            color: onBannerColor, fontWeight: FontWeight.w100, fontSize: 32),
       ),
       bottomAppBar: bottomAppBar,
       child: showProductPage ? productGridView : machinesListView,
