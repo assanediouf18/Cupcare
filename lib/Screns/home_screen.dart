@@ -91,7 +91,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView.builder(
         itemCount: 10,
         itemBuilder: (BuildContext context, int index) {
-          return MachineTile(isWorking: index % 3 != 2);
+          return MachineTile(
+              isWorking: index % 3 != 2,
+              cardAccepted: (index + 1) % 2 != 0,
+              coinAccepted: index % 6 != 0);
         });
   }
 

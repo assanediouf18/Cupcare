@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
 class MachineTile extends StatelessWidget {
-  const MachineTile({super.key, this.isWorking = true});
+  const MachineTile(
+      {super.key,
+      this.isWorking = true,
+      this.cardAccepted = true,
+      this.coinAccepted = true});
 
   final bool isWorking;
+  final bool cardAccepted;
+  final bool coinAccepted;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +37,7 @@ class MachineTile extends StatelessWidget {
               ],
             ),
             Expanded(child: Container()),
-            isWorking
+            /* isWorking
                 ? Icon(
                     Icons.check,
                     color: Theme.of(context).colorScheme.tertiary,
@@ -39,7 +45,27 @@ class MachineTile extends StatelessWidget {
                 : Icon(
                     Icons.close,
                     color: Theme.of(context).colorScheme.error,
-                  )
+                  ), */
+            //Icon(Icons.close),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                isWorking
+                    ? Icon(
+                        Icons.check,
+                        color: Theme.of(context).colorScheme.tertiary,
+                      )
+                    : Icon(Icons.close,
+                        color: Theme.of(context).colorScheme.error),
+                Row(
+                  children: [
+                    cardAccepted ? Icon(Icons.credit_card) : Container(),
+                    coinAccepted ? Icon(Icons.monetization_on) : Container(),
+                  ],
+                )
+              ],
+            ),
           ],
         ),
       ),
