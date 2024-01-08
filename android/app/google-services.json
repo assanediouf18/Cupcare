@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "347779789597",
+    "project_id": "cupcare-c23e2",
+    "storage_bucket": "cupcare-c23e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347779789597:android:2706455088fcfeba0167f4",
+        "android_client_info": {
+          "package_name": "com.example.cupcare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMyxWlnnR2quuv8J_pno6mU6XycErLcoo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
