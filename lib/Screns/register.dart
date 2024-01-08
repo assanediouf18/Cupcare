@@ -76,6 +76,7 @@ class Register extends StatelessWidget {
             SizedBox(height: 5),
             ElevatedButton(
               onPressed: () {},
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
               child: Text(
                 "S'inscrire",
                 style: TextStyle(
@@ -83,7 +84,6 @@ class Register extends StatelessWidget {
                     fontFamily: 'NunitoSans',
                     fontSize: 20),
               ),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
             ),
           ],
         ),

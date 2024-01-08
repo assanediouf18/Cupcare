@@ -61,6 +61,7 @@ class Login extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => HomeScreen()),
                 );
               },
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
               child: Text(
                 'Se connecter',
                 style: TextStyle(
@@ -68,7 +69,6 @@ class Login extends StatelessWidget {
                     fontFamily: 'NunitoSans',
                     fontSize: 20),
               ),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
             ),
           ],
         ),

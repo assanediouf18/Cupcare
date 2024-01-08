@@ -1,5 +1,4 @@
 import 'package:cupcare/Components/machine_tile.dart';
-import 'package:cupcare/Components/product_card.dart';
 import 'package:cupcare/Components/scaffold_template.dart';
 import 'package:cupcare/color_schemes.g.dart';
 import 'package:flutter/material.dart';
@@ -97,9 +96,9 @@ class MachinesGrid extends StatelessWidget {
             width: 400,
             height: 600,
             child: FractionallySizedBox(
-              child: machinesListView,
               widthFactor: 0.85,
               heightFactor: 0.90,
+              child: machinesListView,
             )),
         Positioned(
             top: 0,

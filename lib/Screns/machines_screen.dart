@@ -48,9 +48,9 @@ class _MachineScreenState extends State<MachineScreen> {
               width: 400,
               height: 600,
               child: FractionallySizedBox(
-                child: productGridView,
                 widthFactor: 0.85,
                 heightFactor: 0.90,
+                child: productGridView,
               )),
           Positioned(
               top: 0,
