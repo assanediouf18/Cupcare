@@ -14,7 +14,7 @@ class Authenticator {
             email: "test@test.com",
             password: "test",
             firstName: "Test",
-            lastName: "Test")
+          )
         : null;
   }
 
