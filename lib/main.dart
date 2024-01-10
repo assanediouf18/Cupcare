@@ -1,17 +1,24 @@
+import 'package:cupcare/Model/user_model.dart';
+import 'package:cupcare/Screns/home_screen.dart';
 import 'package:cupcare/Screns/login.dart';
+import 'package:cupcare/Services/authenticator.dart';
 import 'package:cupcare/color_schemes.g.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'dart:collection';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(StreamProvider<UserModel?>(
+    create: (context) => Authenticator().user,
+    initialData: null,
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -37,7 +44,9 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Login(),
+      home: Consumer<UserModel?>(
+          builder: (context, value, child) =>
+              (value != null) ? HomeScreen() : Login()),
     );
   }
 }

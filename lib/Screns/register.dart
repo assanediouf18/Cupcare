@@ -8,90 +8,20 @@ class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: baseMainColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/images/logo_CupCare.png'),
-            Text(
-              'Prénom',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'NunitoSans',
-                  color: Colors.black),
-            ),
-            SizedBox(height: 5),
-            _searchField(""),
-            SizedBox(height: 5),
-            Text(
-              'Email',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'NunitoSans',
-                  color: Colors.black),
-            ),
-            SizedBox(height: 5),
-            _searchField(""),
-            SizedBox(height: 5),
-            Text(
-              'Mot de passe',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'NunitoSans',
-                  color: Colors.black),
-            ),
-            SizedBox(height: 5),
-            _searchField(""),
-            SizedBox(height: 5),
-            Text(
-              'Confirmer le mot de passe',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'NunitoSans',
-                  color: Colors.black),
-            ),
-            SizedBox(height: 5),
-            _searchField(""),
-            SizedBox(height: 10),
-            TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Login()),
-                  );
-                },
-                child: Text("J'ai déjà un compte, me connecter",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'NunitoSans',
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black,
-                        decoration: TextDecoration.underline))),
-            SizedBox(height: 5),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-              child: Text(
-                "S'inscrire",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'NunitoSans',
-                    fontSize: 20),
-              ),
-            ),
+            _buildForm(context)
           ],
         ),
       ),
     );
   }
 
-  Container _searchField(var hintText) {
+  Container _formField(var hintText) {
     return Container(
       margin: EdgeInsets.only(left: 40, right: 40),
       decoration: BoxDecoration(boxShadow: [
@@ -115,6 +45,83 @@ class Register extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               borderSide: BorderSide.none,
             )),
+      ),
+    );
+  }
+
+  Form _buildForm(BuildContext context) {
+    return Form(
+      child: Column(
+        children: [
+          Text(
+            'Prénom',
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+                fontFamily: 'NunitoSans',
+                color: Colors.black),
+          ),
+          SizedBox(height: 5),
+          _formField(""),
+          SizedBox(height: 5),
+          Text(
+            'Email',
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+                fontFamily: 'NunitoSans',
+                color: Colors.black),
+          ),
+          SizedBox(height: 5),
+          _formField(""),
+          SizedBox(height: 5),
+          Text(
+            'Mot de passe',
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+                fontFamily: 'NunitoSans',
+                color: Colors.black),
+          ),
+          SizedBox(height: 5),
+          _formField(""),
+          SizedBox(height: 5),
+          Text(
+            'Confirmer le mot de passe',
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+                fontFamily: 'NunitoSans',
+                color: Colors.black),
+          ),
+          SizedBox(height: 5),
+          _formField(""),
+          SizedBox(height: 10),
+          TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Login()),
+                );
+              },
+              child: Text("J'ai déjà un compte, me connecter",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: 'NunitoSans',
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                      decoration: TextDecoration.underline))),
+          SizedBox(height: 5),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+            child: Text(
+              "S'inscrire",
+              style: TextStyle(
+                  color: Colors.white, fontFamily: 'NunitoSans', fontSize: 20),
+            ),
+          ),
+        ],
       ),
     );
   }
