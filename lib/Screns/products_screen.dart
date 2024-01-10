@@ -1,5 +1,6 @@
 import 'package:cupcare/Components/machine_tile.dart';
 import 'package:cupcare/Components/scaffold_template.dart';
+import 'package:cupcare/Services/authenticator.dart';
 import 'package:cupcare/color_schemes.g.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,9 @@ class _ProductScreenState extends State<ProductScreen> {
       backgroundColor: showProductPage ? baseFourthColor : baseSecondColor,
       appBarActions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Authenticator().signOut();
+            },
             icon: Icon(
               Icons.logout,
               color: Colors.black,

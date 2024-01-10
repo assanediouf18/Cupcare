@@ -1,8 +1,11 @@
 import 'package:cupcare/Components/machine_tile.dart';
 import 'package:cupcare/Components/product_card.dart';
 import 'package:cupcare/Components/scaffold_template.dart';
+import 'package:cupcare/Model/user_model.dart';
+import 'package:cupcare/Services/authenticator.dart';
 import 'package:cupcare/color_schemes.g.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,16 +30,20 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: showProductPage ? baseMainColor : baseSecondColor,
       appBarActions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Authenticator().signOut();
+            },
             icon: Icon(
               Icons.logout,
               color: onBannerColor,
             ))
       ],
-      bannerMainElement: Text(
-        "Bienvenue Jane",
-        style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-            color: onBannerColor, fontWeight: FontWeight.w100, fontSize: 32),
+      bannerMainElement: Consumer<UserModel?>(
+        builder: (context, value, child) => Text(
+          "Bienvenue ${value!.firstName}",
+          style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+              color: onBannerColor, fontWeight: FontWeight.w100, fontSize: 32),
+        ),
       ),
       bottomAppBar: bottomAppBar,
       searchField: searchField,
