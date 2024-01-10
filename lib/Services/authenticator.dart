@@ -40,7 +40,6 @@ class Authenticator {
     }
   }
 
-  //Log out
   Future signOut() async {
     try {
       return await _auth.signOut();
