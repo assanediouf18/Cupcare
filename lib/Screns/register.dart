@@ -1,6 +1,5 @@
 import 'package:cupcare/Components/authentication_form.dart';
 import 'package:cupcare/color_schemes.g.dart';
-import 'package:cupcare/Screns/login.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatelessWidget {
@@ -15,7 +14,9 @@ class Register extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/images/logo_CupCare.png'),
-            AuthenticationForm()
+            AuthenticationForm(
+              showRegisterForm: true,
+            )
           ],
         ),
       ),
