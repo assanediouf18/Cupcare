@@ -14,9 +14,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(StreamProvider<UserModel?>(
+  runApp(StreamProvider<UserModel>(
     create: (context) => Authenticator().user,
-    initialData: null,
+    initialData:
+        UserModel(email: "", password: "", firstName: "", isConnected: false),
     child: const MyApp(),
   ));
 }
@@ -37,16 +38,15 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: GoogleFonts.nunitoSans().fontFamily,
         textTheme: TextTheme(
-          displayLarge: GoogleFonts.salsa(),
-          headlineLarge: GoogleFonts.overlock(),
-          titleLarge: GoogleFonts.overlock().copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+            displayLarge: GoogleFonts.salsa(),
+            headlineLarge: GoogleFonts.overlock(),
+            titleLarge: GoogleFonts.overlock().copyWith(
+              fontWeight: FontWeight.bold,
+            )),
       ),
-      home: Consumer<UserModel?>(
+      home: Consumer<UserModel>(
           builder: (context, value, child) =>
-              (value != null) ? HomeScreen() : Login()),
+              (value.isConnected) ? HomeScreen() : Login()),
     );
   }
 }

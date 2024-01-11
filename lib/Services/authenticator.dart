@@ -4,18 +4,18 @@ import 'package:cupcare/Model/user_model.dart';
 class Authenticator {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Stream<UserModel?> get user {
+  Stream<UserModel> get user {
     return _auth.authStateChanges().map(_userFromFirebaseUser);
   }
 
-  UserModel? _userFromFirebaseUser(User? user) {
+  UserModel _userFromFirebaseUser(User? user) {
     return user != null
         ? UserModel(
             email: "test@test.com",
             password: "test",
             firstName: "Test",
-          )
-        : null;
+            isConnected: true)
+        : UserModel(email: "", password: "", firstName: "", isConnected: false);
   }
 
   Future signInWithEmailPassword(String email, String password) async {
