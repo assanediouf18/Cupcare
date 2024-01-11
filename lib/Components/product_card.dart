@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
   final bool isAvailable;
+  final String name;
+  final String iconName;
 
-  const ProductCard({super.key, this.isAvailable = true});
+  const ProductCard(
+      {super.key,
+      this.isAvailable = true,
+      required this.name,
+      required this.iconName});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,7 @@ class ProductCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image(
-              image: AssetImage("assets/images/coffee_cup.png"),
+              image: AssetImage("assets/images/$iconName"),
               width: size,
               height: size,
             ),
@@ -28,7 +34,7 @@ class ProductCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "Café",
+              name,
               style: isAvailable
                   ? Theme.of(context).textTheme.bodyMedium
                   : TextStyle(color: Colors.white),

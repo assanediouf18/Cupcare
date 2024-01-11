@@ -1,10 +1,13 @@
 import 'package:cupcare/Components/machine_tile.dart';
 import 'package:cupcare/Components/product_card.dart';
 import 'package:cupcare/Components/scaffold_template.dart';
+import 'package:cupcare/Model/product_model.dart';
 import 'package:cupcare/Model/user_model.dart';
 import 'package:cupcare/Services/authenticator.dart';
+import 'package:cupcare/Services/database_service.dart';
 import 'package:cupcare/color_schemes.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,6 +19,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool showProductPage = true;
+  Iterable<ProductModel> products;
+  var isLoading = false;
+  var db = DatabaseService();
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
     var bottomAppBar = getBottomAppBar(bottomAppBarIconSize);
     var onBannerColor = showProductPage ? Colors.black : Colors.white;
     var searchField = _getsearchField("Rechercher dans CupCare");
+
+    loadProducts();
 
     return CupCareScaffoldTemplate(
       backgroundColor: showProductPage ? baseMainColor : baseSecondColor,
@@ -47,7 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomAppBar: bottomAppBar,
       searchField: searchField,
-      child: showProductPage ? productGridView : machinesListView,
+      child: isLoading
+          ? _buildSpinner()
+          : (showProductPage ? productGridView : machinesListView),
     );
   }
 
@@ -86,10 +96,11 @@ class _HomeScreenState extends State<HomeScreen> {
       mainAxisSpacing: 8,
       crossAxisSpacing: 8,
       children: [
-        for (var i = 0; i < 10; i++)
+        for (var product in products)
           ProductCard(
-            isAvailable: (i % 5 != 3),
-          )
+              name: product.name,
+              iconName: product.iconName,
+              isAvailable: product.isAvailable())
       ],
     );
   }
@@ -134,6 +145,26 @@ class _HomeScreenState extends State<HomeScreen> {
               borderSide: BorderSide.none,
             )),
       ),
+    );
+  }
+
+  void loadProducts() async {
+    setState(() {
+      isLoading = true;
+    });
+    var loadedProducts = await db.getProducts();
+    setState(() {
+      isLoading = true;
+      products = loadedProducts;
+    });
+  }
+
+  Widget _buildSpinner() {
+    return Center(
+      child: Column(children: [
+        SpinKitPouringHourGlass(color: baseSecondColor),
+        Text("Chargement...")
+      ]),
     );
   }
 }
