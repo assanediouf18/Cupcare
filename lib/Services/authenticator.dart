@@ -11,11 +11,11 @@ class Authenticator {
   UserModel _userFromFirebaseUser(User? user) {
     return user != null
         ? UserModel(
-            email: "test@test.com",
-            password: "test",
-            firstName: "Test",
-            isConnected: true)
-        : UserModel(email: "", password: "", firstName: "", isConnected: false);
+            email: user.email ?? "error",
+            firstName: user.displayName ?? "",
+            isConnected: true,
+            uid: user.uid)
+        : UserModel(email: "", firstName: "", isConnected: false, uid: '');
   }
 
   Future signInWithEmailPassword(String email, String password) async {
@@ -46,5 +46,11 @@ class Authenticator {
     } catch (e) {
       return null;
     }
+  }
+
+  void updateDisplayName(String displayName) {
+    _auth.authStateChanges().listen((event) {
+      event!.updateDisplayName(displayName);
+    });
   }
 }

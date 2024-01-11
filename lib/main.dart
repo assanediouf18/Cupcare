@@ -17,7 +17,7 @@ void main() async {
   runApp(StreamProvider<UserModel>(
     create: (context) => Authenticator().user,
     initialData:
-        UserModel(email: "", password: "", firstName: "", isConnected: false),
+        UserModel(email: "", firstName: "", isConnected: false, uid: ''),
     child: const MyApp(),
   ));
 }
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Consumer<UserModel>(
           builder: (context, value, child) =>
-              (value.isConnected) ? HomeScreen() : Login()),
+              value.isConnected ? HomeScreen() : Login()),
     );
   }
 }

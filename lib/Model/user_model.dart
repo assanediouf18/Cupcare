@@ -1,12 +1,11 @@
 class UserModel {
-  String email, password;
+  String email, uid;
   String firstName;
   bool isConnected;
 
-  UserModel({
-    required this.email,
-    required this.password,
-    required this.firstName,
-    this.isConnected = false
-  });
+  UserModel(
+      {required this.uid,
+      required this.email,
+      required this.firstName,
+      this.isConnected = false});
 }

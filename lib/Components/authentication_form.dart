@@ -49,9 +49,11 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
           CupCareFormField(
             label: "Mot de passe",
             hintText: "Mon mdp ultra sécurisé",
+            obscureText: true,
             validator: (value) {
-              if (value.isEmpty || value.length < 6)
+              if (value.isEmpty || value.length < 6) {
                 return "Le mot de passe doit être d'au moins 6 caractères";
+              }
               return null;
             },
             onChange: (value) => _updatePassword(value),
@@ -61,6 +63,7 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
               ? CupCareFormField(
                   label: "Confirmer le mot de passe",
                   hintText: "Tellement sécurisé",
+                  obscureText: true,
                   validator: (value) {
                     if (value != password) {
                       return "Les deux mots de passes sont différents";
@@ -104,6 +107,9 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
                     isLoading = false;
                     error = "Une erreur est survenue";
                   });
+                } else if (showRegisterForm) {
+                  await auth.signOut();
+                  redirectToLogin();
                 }
               }
             },
@@ -116,6 +122,13 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
           ),
         ],
       ),
+    );
+  }
+
+  void redirectToLogin() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Login()),
     );
   }
 
@@ -152,12 +165,15 @@ class CupCareFormField extends StatelessWidget {
   final String hintText;
   final validator;
   final onChange;
-  CupCareFormField(
-      {super.key,
-      required this.label,
-      this.hintText = "",
-      this.validator,
-      this.onChange});
+  final bool obscureText;
+  CupCareFormField({
+    super.key,
+    required this.label,
+    this.hintText = "",
+    this.validator,
+    this.onChange,
+    this.obscureText = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -172,12 +188,12 @@ class CupCareFormField extends StatelessWidget {
               color: Colors.black),
         ),
         SizedBox(height: 5),
-        buildFormTextField(hintText)
+        buildFormTextField(hintText, obscureText)
       ],
     );
   }
 
-  Container buildFormTextField(String hintText) {
+  Container buildFormTextField(String hintText, bool obscureText) {
     var inputDecoration = InputDecoration(
         filled: true,
         fillColor: Colors.white,
@@ -205,6 +221,7 @@ class CupCareFormField extends StatelessWidget {
         decoration: inputDecoration,
         validator: validator ?? (value) => null,
         onChanged: onChange ?? (value) {},
+        obscureText: obscureText,
       ),
     );
   }
