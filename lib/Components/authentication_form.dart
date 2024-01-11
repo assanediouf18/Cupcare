@@ -1,3 +1,4 @@
+import 'package:cupcare/Screns/home_screen.dart';
 import 'package:cupcare/Screns/login.dart';
 import 'package:cupcare/Screns/register.dart';
 import 'package:cupcare/Services/authenticator.dart';
@@ -108,8 +109,7 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
                     error = "Une erreur est survenue";
                   });
                 } else if (showRegisterForm) {
-                  await auth.signOut();
-                  redirectToLogin();
+                  redirectToHomeScreen();
                 }
               }
             },
@@ -125,11 +125,12 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
     );
   }
 
-  void redirectToLogin() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Login()),
-    );
+  void redirectToHomeScreen() {
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => HomeScreen(),
+        ),
+        (route) => false);
   }
 
   Widget _buildSpinner() {
