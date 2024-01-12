@@ -1,3 +1,4 @@
+import 'package:cupcare/Model/machine_model.dart';
 import 'package:cupcare/Model/product_model.dart';
 import 'package:cupcare/Model/user_model.dart';
 import 'package:cupcare/Screns/home_screen.dart';
@@ -48,9 +49,15 @@ class MyApp extends StatelessWidget {
       ),
       home: Consumer<UserModel>(builder: (context, value, child) {
         if (value.isConnected) {
-          return StreamProvider<Iterable<ProductModel>>(
-            create: (context) => DatabaseService().getProducts(),
-            initialData: [],
+          return MultiProvider(
+            providers: [
+              StreamProvider<Iterable<ProductModel>>(
+                  create: (context) => DatabaseService().getProducts(),
+                  initialData: []),
+              StreamProvider<Iterable<MachineModel>>(
+                  create: (context) => DatabaseService().getMachines(),
+                  initialData: []),
+            ],
             child: HomeScreen(),
           );
         }
