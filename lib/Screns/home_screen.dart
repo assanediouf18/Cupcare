@@ -98,9 +98,8 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             for (var product in value)
               ProductCard(
-                  name: product.name,
-                  iconName: product.iconName,
-                  isAvailable: product.isAvailable())
+                product: product,
+              )
           ],
         );
       },
@@ -112,6 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
         itemCount: 10,
         itemBuilder: (BuildContext context, int index) {
           return MachineTile(
+              name: "Test",
               isWorking: index % 3 != 2,
               cardAccepted: (index + 1) % 2 != 0,
               coinAccepted: index % 6 != 0);

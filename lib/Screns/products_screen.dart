@@ -1,11 +1,13 @@
 import 'package:cupcare/Components/machine_tile.dart';
 import 'package:cupcare/Components/scaffold_template.dart';
+import 'package:cupcare/Model/product_model.dart';
 import 'package:cupcare/Services/authenticator.dart';
 import 'package:cupcare/color_schemes.g.dart';
 import 'package:flutter/material.dart';
 
 class ProductScreen extends StatefulWidget {
-  const ProductScreen({super.key});
+  final ProductModel product;
+  const ProductScreen({super.key, required this.product});
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -33,11 +35,16 @@ class _ProductScreenState extends State<ProductScreen> {
               color: Colors.black,
             ))
       ],
-      bannerMainElement: Image.asset('assets/images/Protein_bar.png'),
+      bannerMainElement: Image.asset(
+        'assets/images/${widget.product.iconName}',
+        scale: 3,
+      ),
       bottomAppBar: bottomAppBar,
       searchField: Container(),
-      //child: Text('Hello'),
-      child: MachinesGrid(machinesListView: machinesListView),
+      child: MachinesGrid(
+        machinesListView: machinesListView,
+        product: widget.product,
+      ),
     );
   }
 
@@ -71,11 +78,15 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   Widget buildMachinesListView() {
+    var machines = widget.product.machines;
     return ListView.builder(
-        itemCount: 10,
+        itemCount: machines.length,
         itemBuilder: (BuildContext context, int index) {
+          print(machines[index]);
           return MachineTile(
-              isWorking: index % 3 != 2,
+              name: "Machine",
+              price: machines[index]["price"],
+              isWorking: machines[index]["availability"],
               cardAccepted: (index + 1) % 2 != 0,
               coinAccepted: index % 6 != 0);
         });
@@ -86,9 +97,11 @@ class MachinesGrid extends StatelessWidget {
   const MachinesGrid({
     super.key,
     required this.machinesListView,
+    required this.product,
   });
 
   final Widget machinesListView;
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +120,7 @@ class MachinesGrid extends StatelessWidget {
             top: 0,
             left: 90,
             child: Text(
-              'Product Name',
+              product.name,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontFamily: 'NunitoSans',

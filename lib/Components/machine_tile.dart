@@ -5,11 +5,15 @@ class MachineTile extends StatelessWidget {
       {super.key,
       this.isWorking = true,
       this.cardAccepted = true,
-      this.coinAccepted = true});
+      this.coinAccepted = true,
+      required this.name,
+      this.price = 1});
 
   final bool isWorking;
   final bool cardAccepted;
   final bool coinAccepted;
+  final String name;
+  final int price;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +34,10 @@ class MachineTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Nom de la machine",
+                  name,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
-                Text("Prix: 0.01 euro")
+                Text("Prix: ${price / 100} euro")
               ],
             ),
             Expanded(child: Container()),

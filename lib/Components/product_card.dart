@@ -1,46 +1,50 @@
+import 'package:cupcare/Model/product_model.dart';
+import 'package:cupcare/Screns/products_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:pressable/pressable.dart';
 
 class ProductCard extends StatelessWidget {
-  final bool isAvailable;
-  final String name;
-  final String iconName;
+  final ProductModel product;
 
-  const ProductCard(
-      {super.key,
-      this.isAvailable = true,
-      required this.name,
-      required this.iconName});
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     var size = 96.0;
-    return Card(
-      color: isAvailable
-          ? Theme.of(context).cardTheme.surfaceTintColor
-          : Theme.of(context).colorScheme.error,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image(
-              image: AssetImage("assets/images/$iconName"),
-              width: size,
-              height: size,
+    return Pressable.opacity(
+      onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductScreen(product: product),
+          )),
+      child: Card(
+        color: product.isAvailable()
+            ? Theme.of(context).cardTheme.surfaceTintColor
+            : Theme.of(context).colorScheme.error,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image(
+                image: AssetImage("assets/images/${product.iconName}"),
+                width: size,
+                height: size,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              name,
-              style: isAvailable
-                  ? Theme.of(context).textTheme.bodyMedium
-                  : TextStyle(color: Colors.white),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                product.name,
+                style: product.isAvailable()
+                    ? Theme.of(context).textTheme.bodyMedium
+                    : TextStyle(color: Colors.white),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
