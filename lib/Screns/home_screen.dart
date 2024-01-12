@@ -1,6 +1,7 @@
 import 'package:cupcare/Components/machine_tile.dart';
 import 'package:cupcare/Components/product_card.dart';
 import 'package:cupcare/Components/scaffold_template.dart';
+import 'package:cupcare/Model/machine_model.dart';
 import 'package:cupcare/Model/product_model.dart';
 import 'package:cupcare/Model/user_model.dart';
 import 'package:cupcare/Services/authenticator.dart';
@@ -107,15 +108,20 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildMachinesListView() {
-    return ListView.builder(
-        itemCount: 10,
-        itemBuilder: (BuildContext context, int index) {
-          return MachineTile(
-              name: "Test",
-              isWorking: index % 3 != 2,
-              cardAccepted: (index + 1) % 2 != 0,
-              coinAccepted: index % 6 != 0);
-        });
+    return Consumer<Iterable<MachineModel>>(
+      builder: (context, value, child) {
+        return ListView.builder(
+            itemCount: value.length,
+            itemBuilder: (BuildContext context, int index) {
+              var machine = value.elementAt(index);
+              return MachineTile(
+                  name: machine.position,
+                  isWorking: index % 3 != 2,
+                  cardAccepted: (index + 1) % 2 != 0,
+                  coinAccepted: index % 6 != 0);
+            });
+      },
+    );
   }
 
   Container _getsearchField(var hintText) {

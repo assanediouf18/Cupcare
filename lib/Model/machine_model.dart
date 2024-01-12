@@ -12,7 +12,7 @@ class MachineModel {
     final data = snapshot.data();
     return MachineModel(
         position: data?["position"] ?? "Error",
-        cardAvailable: data?["cardAvailable"]);
+        cardAvailable: data?["cardAvailable"] ?? true);
   }
 
   Map<String, dynamic> toFirestore() {
