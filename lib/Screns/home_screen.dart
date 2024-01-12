@@ -19,20 +19,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool showProductPage = true;
-  Iterable<ProductModel> products;
+  Iterable<ProductModel> products = [];
   var isLoading = false;
   var db = DatabaseService();
 
   @override
   Widget build(BuildContext context) {
     var bottomAppBarIconSize = 32.0;
-    var productGridView = buildProductGridView();
+    var productGridView = buildProductGridView(context);
     var machinesListView = buildMachinesListView();
     var bottomAppBar = getBottomAppBar(bottomAppBarIconSize);
     var onBannerColor = showProductPage ? Colors.black : Colors.white;
     var searchField = _getsearchField("Rechercher dans CupCare");
-
-    loadProducts();
 
     return CupCareScaffoldTemplate(
       backgroundColor: showProductPage ? baseMainColor : baseSecondColor,
@@ -90,18 +88,22 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 
-  GridView buildProductGridView() {
-    return GridView.count(
-      crossAxisCount: 2,
-      mainAxisSpacing: 8,
-      crossAxisSpacing: 8,
-      children: [
-        for (var product in products)
-          ProductCard(
-              name: product.name,
-              iconName: product.iconName,
-              isAvailable: product.isAvailable())
-      ],
+  Widget buildProductGridView(BuildContext context) {
+    return Consumer<Iterable<ProductModel>>(
+      builder: (context, value, child) {
+        return GridView.count(
+          crossAxisCount: 2,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+          children: [
+            for (var product in value)
+              ProductCard(
+                  name: product.name,
+                  iconName: product.iconName,
+                  isAvailable: product.isAvailable())
+          ],
+        );
+      },
     );
   }
 
@@ -146,17 +148,6 @@ class _HomeScreenState extends State<HomeScreen> {
             )),
       ),
     );
-  }
-
-  void loadProducts() async {
-    setState(() {
-      isLoading = true;
-    });
-    var loadedProducts = await db.getProducts();
-    setState(() {
-      isLoading = true;
-      products = loadedProducts;
-    });
   }
 
   Widget _buildSpinner() {

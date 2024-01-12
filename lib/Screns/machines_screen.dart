@@ -149,6 +149,8 @@ class _MachineScreenState extends State<MachineScreen> {
       children: [
         for (var i = 0; i < 10; i++)
           ProductCard(
+            name: "Café",
+            iconName: "coffee_cup.png",
             isAvailable: (i % 5 != 3),
           )
       ],
