@@ -1,5 +1,4 @@
 import 'package:cupcare/Components/machine_tile.dart';
-import 'package:cupcare/Components/product_card.dart';
 import 'package:cupcare/Components/scaffold_template.dart';
 import 'package:cupcare/color_schemes.g.dart';
 import 'package:flutter/material.dart';
@@ -93,45 +92,49 @@ class MachinesGrid extends StatelessWidget {
     return Stack(
       children: [
         Positioned(
-            top: 80,
-            width: 400,
-            height: 600,
-            child: FractionallySizedBox(
-              child: machinesListView,
-              widthFactor: 0.85,
-              heightFactor: 0.90,
-            )),
+          top: 110,
+          width: 400,
+          height: 400,
+          right: 0,
+          child: FractionallySizedBox(
+            child: machinesListView,
+          ),
+        ),
+        //Positionnement du titre
         Positioned(
             top: 0,
-            left: 90,
-            child: Text(
-              'Product Name',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontFamily: 'NunitoSans',
-                fontSize: 24,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Container(
+                height: 50,
+                child: Text(
+                  'ProductName',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'NunitoSans',
+                    fontSize: 24,
+                  ),
+                ),
               ),
             )),
+        //Positionnement de la description
         Positioned(
             top: 50,
-            left: 0,
-            child: Text(
-              'Appuie sur une machine pour mettre à jour la ',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontFamily: 'NunitoSans',
-                fontSize: 15,
+            left: 20,
+            right: 0,
+            child: Center(
+              child: Container(
+                height: 50,
+                child: Text(
+                  'Appuie sur une machine pour mettre à jour la disponibilité du produit',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'NunitoSans',
+                    fontSize: 15,
+                  ),
+                ),
               ),
-            )),
-        Positioned(
-            top: 70,
-            left: 0,
-            child: Text(
-              'disponibilité du produit',
-              style: TextStyle(
-                  fontFamily: 'NunitoSans',
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
             )),
       ],
     );
