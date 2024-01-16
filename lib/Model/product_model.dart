@@ -20,6 +20,13 @@ class ProductModel {
     return true;
   }
 
+  bool isAvailableOnMachine(String machineRef) {
+    var currentMachine =
+        machines.firstWhere((element) => element["machine"] == machineRef);
+    if (currentMachine == null) return false;
+    return currentMachine["availability"];
+  }
+
   factory ProductModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> snapshot,
       SnapshotOptions? options) {

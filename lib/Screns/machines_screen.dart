@@ -5,6 +5,7 @@ import 'package:cupcare/Model/product_model.dart';
 import 'package:cupcare/Services/authenticator.dart';
 import 'package:cupcare/color_schemes.g.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MachineScreen extends StatefulWidget {
   const MachineScreen({super.key, required this.machine});
@@ -143,20 +144,28 @@ class _MachineScreenState extends State<MachineScreen> {
     ));
   }
 
-  GridView buildProductGridView() {
-    return GridView.count(
-      crossAxisCount: 2,
-      mainAxisSpacing: 12,
-      crossAxisSpacing: 25,
-      children: [
-        for (var i = 0; i < 10; i++)
-          ProductCard(
-              activateNavigation: false,
-              product: ProductModel(
-                  iconName: "coffee_cup.png",
-                  name: "Café de test",
-                  machines: []))
-      ],
+  Widget buildProductGridView() {
+    return Consumer<Iterable<ProductModel>>(
+      builder: (context, value, child) {
+        var products = value.where(
+            (element) => element.isAvailableOnMachine(widget.machine.docRef));
+        return products.isNotEmpty
+            ? GridView.count(
+                crossAxisCount: 2,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 25,
+                children: [
+                  for (var product in products)
+                    ProductCard(
+                      activateNavigation: false,
+                      product: product,
+                    )
+                ],
+              )
+            : SizedBox(
+                width: 10,
+              );
+      },
     );
   }
 
