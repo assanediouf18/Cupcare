@@ -3,8 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class MachineModel {
   final String position;
   final bool cardAvailable;
+  final String docRef;
 
-  const MachineModel({required this.position, this.cardAvailable = true});
+  const MachineModel(
+      {required this.position,
+      required this.docRef,
+      this.cardAvailable = true});
 
   factory MachineModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> snapshot,
@@ -12,6 +16,7 @@ class MachineModel {
     final data = snapshot.data();
     return MachineModel(
         position: data?["position"] ?? "Error",
+        docRef: snapshot.id,
         cardAvailable: data?["cardAvailable"] ?? true);
   }
 

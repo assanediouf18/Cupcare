@@ -1,9 +1,11 @@
 import 'package:cupcare/Components/machine_tile.dart';
 import 'package:cupcare/Components/scaffold_template.dart';
+import 'package:cupcare/Model/machine_model.dart';
 import 'package:cupcare/Model/product_model.dart';
 import 'package:cupcare/Services/authenticator.dart';
 import 'package:cupcare/color_schemes.g.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductScreen extends StatefulWidget {
   final ProductModel product;
@@ -78,17 +80,22 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   Widget buildMachinesListView() {
-    var machines = widget.product.machines;
+    List machines = widget.product.machines;
     return ListView.builder(
         itemCount: machines.length,
         itemBuilder: (BuildContext context, int index) {
           print(machines[index]);
-          return MachineTile(
-              name: "Machine",
-              price: machines[index]["price"],
-              isWorking: machines[index]["availability"],
-              cardAccepted: (index + 1) % 2 != 0,
-              coinAccepted: index % 6 != 0);
+          return Consumer<Iterable<MachineModel>>(
+              builder: (context, value, child) {
+            var currentMachine = value.firstWhere(
+                (element) => element.docRef == machines[index]["machine"]);
+            return MachineTile(
+                name: currentMachine.position,
+                price: machines[index]["price"],
+                isWorking: machines[index]["availability"],
+                cardAccepted: (index + 1) % 2 != 0,
+                coinAccepted: index % 6 != 0);
+          });
         });
   }
 }

@@ -3,14 +3,14 @@ import 'package:cupcare/Model/machine_model.dart';
 import 'package:cupcare/Model/product_model.dart';
 
 class DatabaseService {
-  final CollectionReference _products =
+  final CollectionReference products =
       FirebaseFirestore.instance.collection("products");
 
-  final CollectionReference _machines =
+  final CollectionReference machines =
       FirebaseFirestore.instance.collection("machines");
 
   Stream<Iterable<ProductModel>> getProducts() {
-    var ref = _products.withConverter(
+    var ref = products.withConverter(
         fromFirestore: ProductModel.fromFirestore,
         toFirestore: (ProductModel product, _) => product.toFirestore());
     return ref
@@ -20,7 +20,7 @@ class DatabaseService {
   }
 
   Stream<Iterable<MachineModel>> getMachines() {
-    var ref = _machines.withConverter(
+    var ref = machines.withConverter(
         fromFirestore: MachineModel.fromFirestore,
         toFirestore: (MachineModel machine, _) => machine.toFirestore());
     return ref

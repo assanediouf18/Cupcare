@@ -17,13 +17,29 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(StreamProvider<UserModel>(
-    create: (context) => Authenticator().user,
-    initialData:
-        UserModel(email: "", firstName: "", isConnected: false, uid: ''),
+  runApp(MultiProvider(
+    providers: [
+      StreamProvider(
+          create: (context) => Authenticator().user,
+          initialData:
+              UserModel(email: "", firstName: "", isConnected: false, uid: '')),
+      StreamProvider<Iterable<ProductModel>>(
+          create: (context) => DatabaseService().getProducts(),
+          initialData: []),
+      StreamProvider<Iterable<MachineModel>>(
+          create: (context) => DatabaseService().getMachines(),
+          initialData: []),
+    ],
     child: const MyApp(),
   ));
 }
+
+/*
+StreamProvider<UserModel>(
+    create: (context) => Authenticator().user,
+    initialData:
+        UserModel(email: "", firstName: "", isConnected: false, uid: ''),
+*/
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -49,17 +65,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Consumer<UserModel>(builder: (context, value, child) {
         if (value.isConnected) {
-          return MultiProvider(
-            providers: [
-              StreamProvider<Iterable<ProductModel>>(
-                  create: (context) => DatabaseService().getProducts(),
-                  initialData: []),
-              StreamProvider<Iterable<MachineModel>>(
-                  create: (context) => DatabaseService().getMachines(),
-                  initialData: []),
-            ],
-            child: HomeScreen(),
-          );
+          return HomeScreen();
         }
         return Login();
       }),

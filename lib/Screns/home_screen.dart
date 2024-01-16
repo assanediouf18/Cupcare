@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var bottomAppBarIconSize = 32.0;
     var productGridView = buildProductGridView(context);
-    var machinesListView = buildMachinesListView();
+    var machinesListView = buildMachinesListView(context);
     var bottomAppBar = getBottomAppBar(bottomAppBarIconSize);
     var onBannerColor = showProductPage ? Colors.black : Colors.white;
     var searchField = _getsearchField("Rechercher dans CupCare");
@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildMachinesListView() {
+  Widget buildMachinesListView(BuildContext context) {
     return Consumer<Iterable<MachineModel>>(
       builder: (context, value, child) {
         return ListView.builder(
