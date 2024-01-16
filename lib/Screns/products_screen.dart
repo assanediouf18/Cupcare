@@ -121,41 +121,38 @@ class MachinesGrid extends StatelessWidget {
             width: 400,
             height: 600,
             child: FractionallySizedBox(
+              child: machinesListView,
               widthFactor: 0.85,
               heightFactor: 0.90,
-              child: machinesListView,
             )),
         Positioned(
             top: 0,
             left: 90,
             child: Text(
-              product.name,
+              'Product Name',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontFamily: 'NunitoSans',
                 fontSize: 24,
               ),
             )),
+        //Positionnement de la description
         Positioned(
             top: 50,
-            left: 0,
-            child: Text(
-              'Appuie sur une machine pour mettre à jour la ',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontFamily: 'NunitoSans',
-                fontSize: 15,
+            left: 20,
+            right: 0,
+            child: Center(
+              child: Container(
+                height: 50,
+                child: Text(
+                  'Appuie sur une machine pour mettre à jour la disponibilité du produit',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'NunitoSans',
+                    fontSize: 15,
+                  ),
+                ),
               ),
-            )),
-        Positioned(
-            top: 70,
-            left: 0,
-            child: Text(
-              'disponibilité du produit',
-              style: TextStyle(
-                  fontFamily: 'NunitoSans',
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
             )),
       ],
     );

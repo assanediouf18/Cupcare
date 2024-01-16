@@ -52,15 +52,15 @@ class _MachineScreenState extends State<MachineScreen> {
               width: 400,
               height: 600,
               child: FractionallySizedBox(
+                child: productGridView,
                 widthFactor: 0.85,
                 heightFactor: 0.90,
-                child: productGridView,
               )),
           Positioned(
               top: 0,
               left: 90,
               child: Text(
-                widget.machine.position,
+                'Machine Position',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: 'NunitoSans',
@@ -83,9 +83,7 @@ class _MachineScreenState extends State<MachineScreen> {
               left: 300,
               child: Row(
                 children: [
-                  widget.machine.cardAvailable
-                      ? Icon(Icons.credit_card)
-                      : Container(),
+                  Icon(Icons.credit_card),
                   Icon(Icons.monetization_on)
                 ],
               )),
@@ -173,7 +171,10 @@ class _MachineScreenState extends State<MachineScreen> {
     return ListView.builder(
         itemCount: 10,
         itemBuilder: (BuildContext context, int index) {
-          return Text("Test");
+          return MachineTile(
+              isWorking: index % 3 != 2,
+              cardAccepted: (index + 1) % 2 != 0,
+              coinAccepted: index % 6 != 0);
         });
   }
 
