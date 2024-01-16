@@ -160,9 +160,7 @@ class _MachineScreenState extends State<MachineScreen> {
                     )
                 ],
               )
-            : SizedBox(
-                width: 10,
-              );
+            : Container();
       },
     );
   }

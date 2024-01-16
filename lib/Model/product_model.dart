@@ -21,10 +21,10 @@ class ProductModel {
   }
 
   bool isAvailableOnMachine(String machineRef) {
+    return true;
     var currentMachine =
         machines.firstWhere((element) => element["machine"] == machineRef);
-    if (currentMachine == null) return false;
-    return currentMachine["availability"];
+    return currentMachine["availability"] ?? false;
   }
 
   factory ProductModel.fromFirestore(
