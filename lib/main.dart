@@ -34,13 +34,6 @@ void main() async {
   ));
 }
 
-/*
-StreamProvider<UserModel>(
-    create: (context) => Authenticator().user,
-    initialData:
-        UserModel(email: "", firstName: "", isConnected: false, uid: ''),
-*/
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
