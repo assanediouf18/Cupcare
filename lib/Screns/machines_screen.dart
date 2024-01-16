@@ -1,13 +1,15 @@
-import 'package:cupcare/Components/machine_tile.dart';
 import 'package:cupcare/Components/product_card.dart';
 import 'package:cupcare/Components/scaffold_template.dart';
+import 'package:cupcare/Model/machine_model.dart';
 import 'package:cupcare/Model/product_model.dart';
 import 'package:cupcare/Services/authenticator.dart';
 import 'package:cupcare/color_schemes.g.dart';
 import 'package:flutter/material.dart';
 
 class MachineScreen extends StatefulWidget {
-  const MachineScreen({super.key});
+  const MachineScreen({super.key, required this.machine});
+
+  final MachineModel machine;
 
   @override
   State<MachineScreen> createState() => _MachineScreenState();
@@ -20,10 +22,7 @@ class _MachineScreenState extends State<MachineScreen> {
   Widget build(BuildContext context) {
     var bottomAppBarIconSize = 32.0;
     var productGridView = buildProductGridView();
-    var machinesListView = buildMachinesListView();
     var bottomAppBar = getBottomAppBar(bottomAppBarIconSize);
-    var onBannerColor = showProductPage ? Colors.black : Colors.white;
-    var searchField = _getsearchField("Rechercher dans CupCare");
 
     return CupCareScaffoldTemplate(
       angle: 64,
@@ -60,7 +59,7 @@ class _MachineScreenState extends State<MachineScreen> {
               top: 0,
               left: 90,
               child: Text(
-                'Machine Position',
+                widget.machine.position,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: 'NunitoSans',
@@ -83,7 +82,9 @@ class _MachineScreenState extends State<MachineScreen> {
               left: 300,
               child: Row(
                 children: [
-                  Icon(Icons.credit_card),
+                  widget.machine.cardAvailable
+                      ? Icon(Icons.credit_card)
+                      : Container(),
                   Icon(Icons.monetization_on)
                 ],
               )),
@@ -150,6 +151,7 @@ class _MachineScreenState extends State<MachineScreen> {
       children: [
         for (var i = 0; i < 10; i++)
           ProductCard(
+              activateNavigation: false,
               product: ProductModel(
                   iconName: "coffee_cup.png",
                   name: "Café de test",
@@ -162,12 +164,7 @@ class _MachineScreenState extends State<MachineScreen> {
     return ListView.builder(
         itemCount: 10,
         itemBuilder: (BuildContext context, int index) {
-          return MachineTile(
-            isWorking: index % 3 != 2,
-            cardAccepted: (index + 1) % 2 != 0,
-            coinAccepted: index % 6 != 0,
-            name: 'Test',
-          );
+          return Text("Test");
         });
   }
 

@@ -90,6 +90,8 @@ class _ProductScreenState extends State<ProductScreen> {
             var currentMachine = value.firstWhere(
                 (element) => element.docRef == machines[index]["machine"]);
             return MachineTile(
+                activateNavigation: false,
+                machine: currentMachine,
                 name: currentMachine.position,
                 price: machines[index]["price"],
                 isWorking: machines[index]["availability"],

@@ -6,17 +6,25 @@ import 'package:pressable/pressable.dart';
 class ProductCard extends StatelessWidget {
   final ProductModel product;
 
-  const ProductCard({super.key, required this.product});
+  const ProductCard({
+    super.key,
+    required this.product,
+    this.activateNavigation = true,
+  });
+
+  final bool activateNavigation;
 
   @override
   Widget build(BuildContext context) {
     var size = 96.0;
     return Pressable.opacity(
-      onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ProductScreen(product: product),
-          )),
+      onPressed: activateNavigation
+          ? () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProductScreen(product: product),
+              ))
+          : () => {},
       child: Card(
         color: product.isAvailable()
             ? Theme.of(context).cardTheme.surfaceTintColor

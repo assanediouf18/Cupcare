@@ -115,6 +115,8 @@ class _HomeScreenState extends State<HomeScreen> {
             itemBuilder: (BuildContext context, int index) {
               var machine = value.elementAt(index);
               return MachineTile(
+                  activateNavigation: true,
+                  machine: machine,
                   name: machine.position,
                   isWorking: index % 3 != 2,
                   cardAccepted: (index + 1) % 2 != 0,

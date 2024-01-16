@@ -3,10 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ProductModel {
   final String name;
   final String iconName;
+  final String docRef;
   final List machines;
 
   ProductModel(
-      {required this.name, required this.iconName, required this.machines});
+      {required this.name,
+      required this.iconName,
+      required this.machines,
+      this.docRef = ""});
 
   bool isAvailable() {
     for (var machineInfo in machines) {
@@ -21,6 +25,7 @@ class ProductModel {
       SnapshotOptions? options) {
     final data = snapshot.data();
     return ProductModel(
+        docRef: snapshot.id,
         name: data?['name'] ?? "Error",
         iconName: data?['iconName'] ?? "coffee_cup.png",
         machines: data?["machines"] ?? []);
