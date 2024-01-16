@@ -129,7 +129,7 @@ class MachinesGrid extends StatelessWidget {
             top: 0,
             left: 90,
             child: Text(
-              'Product Name',
+              product.name,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontFamily: 'NunitoSans',

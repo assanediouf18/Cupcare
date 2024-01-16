@@ -60,7 +60,7 @@ class _MachineScreenState extends State<MachineScreen> {
               top: 0,
               left: 90,
               child: Text(
-                'Machine Position',
+                widget.machine.position,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: 'NunitoSans',
