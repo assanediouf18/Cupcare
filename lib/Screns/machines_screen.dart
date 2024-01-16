@@ -171,10 +171,7 @@ class _MachineScreenState extends State<MachineScreen> {
     return ListView.builder(
         itemCount: 10,
         itemBuilder: (BuildContext context, int index) {
-          return MachineTile(
-              isWorking: index % 3 != 2,
-              cardAccepted: (index + 1) % 2 != 0,
-              coinAccepted: index % 6 != 0);
+          return Text("Test");
         });
   }
 
