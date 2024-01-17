@@ -117,23 +117,29 @@ class MachinesGrid extends StatelessWidget {
     return Stack(
       children: [
         Positioned(
-            top: 80,
+            top: 110,
             width: 400,
-            height: 600,
+            height: 500,
+            right: 0,
             child: FractionallySizedBox(
               child: machinesListView,
-              widthFactor: 0.85,
-              heightFactor: 0.90,
             )),
+        //Positionnement du titre
         Positioned(
             top: 0,
-            left: 90,
-            child: Text(
-              product.name,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontFamily: 'NunitoSans',
-                fontSize: 24,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Container(
+                height: 50,
+                child: Text(
+                  product.name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'NunitoSans',
+                    fontSize: 24,
+                  ),
+                ),
               ),
             )),
         //Positionnement de la description

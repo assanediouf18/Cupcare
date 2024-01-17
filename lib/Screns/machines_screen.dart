@@ -48,7 +48,7 @@ class _MachineScreenState extends State<MachineScreen> {
       child: Stack(
         children: [
           Positioned(
-              top: 120,
+              top: 130,
               width: 400,
               height: 600,
               child: FractionallySizedBox(
@@ -56,56 +56,61 @@ class _MachineScreenState extends State<MachineScreen> {
                 widthFactor: 0.85,
                 heightFactor: 0.90,
               )),
+          //Positionnement du titre
           Positioned(
               top: 0,
-              left: 90,
-              child: Text(
-                widget.machine.position,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'NunitoSans',
-                  fontSize: 24,
-                ),
-              )),
-          Positioned(
-              top: 50,
               left: 0,
-              child: Text(
-                'Moyens de paiements disponibles :',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'NunitoSans',
-                  fontSize: 15,
+              right: 0,
+              child: Center(
+                child: Container(
+                  child: Text(
+                    widget.machine.position,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'NunitoSans',
+                      fontSize: 24,
+                    ),
+                  ),
                 ),
               )),
+          //Positionnement des moyens de paiements dispo
           Positioned(
               top: 50,
-              left: 300,
-              child: Row(
-                children: [
-                  Icon(Icons.credit_card),
-                  Icon(Icons.monetization_on)
-                ],
+              left: 20,
+              child: Center(
+                child: Container(
+                  child: Row(
+                    children: [
+                      Text(
+                        'Moyens de paiements disponibles :',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'NunitoSans',
+                          fontSize: 15,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 40,
+                      ),
+                      Icon(Icons.credit_card),
+                      Icon(Icons.monetization_on),
+                    ],
+                  ),
+                ),
               )),
           Positioned(
               top: 100,
-              left: 0,
-              child: Text(
-                'Appuie sur un produit pour mettre à jour ',
-                style: TextStyle(
-                    fontFamily: 'NunitoSans',
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500),
-              )),
-          Positioned(
-              top: 120,
-              left: 0,
-              child: Text(
-                'sa disponibilité sur la machine',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'NunitoSans',
-                  fontSize: 15,
+              left: 20,
+              right: 0,
+              child: Center(
+                child: Container(
+                  child: Text(
+                    'Appuie sur un produit pour mettre à jour sa disponibilité sur la machine',
+                    style: TextStyle(
+                        fontFamily: 'NunitoSans',
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500),
+                  ),
                 ),
               )),
         ],
